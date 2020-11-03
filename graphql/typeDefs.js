@@ -10,5 +10,7 @@ module.exports = gql`
         token: String!,
         createdAt: String!
     }
-
+    type Query {
+        getUsers: User
+    }
 `
