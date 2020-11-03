@@ -1,14 +1,12 @@
-const login = require('./login')
-const signup = require('./createUser')
+const login = require("./login");
+const signup = require("./signup");
 
 const resolvers = {
-  Query: {
-
-  },
+  Query: {},
   Mutation: {
     login,
-    signup
-  }
-}
+    signup,
+  },
+};
 
-module.exports = resolvers
+module.exports = resolvers;
