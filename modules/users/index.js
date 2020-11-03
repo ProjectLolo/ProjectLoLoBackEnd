@@ -1,6 +1,6 @@
 const { gql } = require("apollo-server")
 
-module.exports = gql`
+const typeDefs = gql`
     type User {
         id: ID!,
         firstName: String!,
@@ -14,3 +14,12 @@ module.exports = gql`
         getUsers: User
     }
 `
+
+const resolvers = require('./resolvers')
+
+module.exports = {
+  typeDefs: [
+    typeDefs
+  ],
+  resolvers
+}

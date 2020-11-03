@@ -1,13 +1,12 @@
 const { ApolloServer } = require('apollo-server')
 const mongoose = require('mongoose')
-
-const typeDefs = require("./graphql/typeDefs")
-const resolvers = require("./graphql/resolvers")
+const schema = require('./modules')
+// const typeDefs = require("./graphql/typeDefs")
+// const resolvers = require("./graphql/resolvers")
 const { MONGODB, PORT } = require("./config/constants")
 
 const server = new ApolloServer({
-    typeDefs,
-    resolvers
+    schema
 })
 
 mongoose
