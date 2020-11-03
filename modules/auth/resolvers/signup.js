@@ -1,19 +1,25 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+const { SALT_ROUNDS } = require('../../../config/constants')
+
+
 const User = require("../../../models/User");
 
-const createUser = async (
-  _,
-  { signupInput: { email, firstName, lastName, nickName, password } }
-) => {
-  try {
-    const existingUser = await User.findOne({ email: email });
-    if (existingUser) {
-      throw new Error("User exists already.");
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 12);
+const createUser = async (_, { 
+  signupInput: { 
+    firstName, 
+    lastName, 
+    nickName, 
+    password, 
+    email}
+}) => {
+    try {
+      const existingUser = await User.findOne({ email: email });
+      if (existingUser) {
+        throw new Error("User exists already.");
+      }
+      const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
 
     const user = new User({
       firstName,
