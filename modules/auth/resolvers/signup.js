@@ -8,7 +8,6 @@ const createUser = async (
   { signupInput: { email, firstName, lastName, nickName, password } }
 ) => {
   try {
-    console.log(email);
     const existingUser = await User.findOne({ email: email });
     if (existingUser) {
       throw new Error("User exists already.");
