@@ -1,4 +1,5 @@
 const { gql } = require("apollo-server");
+const resolvers = require("./resolvers");
 
 const typeDefs = gql`
   extend type Query {
@@ -6,7 +7,7 @@ const typeDefs = gql`
   }
 
   extend type Mutation {
-    login(email: String!, password: String!): AuthData
+    login(loginInput: LoginInput): AuthData
     signup(signupInput: SignupInput): User
   }
   type AuthData {
@@ -29,9 +30,12 @@ const typeDefs = gql`
     lastName: String!
     nickName: String!
   }
+  input LoginInput {
+    email: String!
+    password: String!
+  }
 `;
 
-const resolvers = require("./resolvers");
 
 module.exports = {
   typeDefs: [typeDefs],

@@ -1,11 +1,9 @@
-const login = require("./login");
-const signup = require("./signup");
+const mutations = require("./mutations")
 
 const resolvers = {
   Query: {},
   Mutation: {
-    login,
-    signup,
+    ...mutations
   },
 };
 
