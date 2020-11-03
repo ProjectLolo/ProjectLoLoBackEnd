@@ -9,4 +9,4 @@ function toData(token) {
   return jwt.verify(token, secret);
 }
 
-module.exports = { toJWT, toData, emailToken, validatingEmail };
+module.exports = { toJWT, toData };

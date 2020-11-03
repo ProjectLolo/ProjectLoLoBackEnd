@@ -1,4 +1,5 @@
 const { gql } = require("apollo-server");
+const resolvers = require("./resolvers");
 
 const typeDefs = gql`
   extend type Query {
@@ -35,7 +36,6 @@ const typeDefs = gql`
   }
 `;
 
-const resolvers = require("./resolvers");
 
 module.exports = {
   typeDefs: [typeDefs],
