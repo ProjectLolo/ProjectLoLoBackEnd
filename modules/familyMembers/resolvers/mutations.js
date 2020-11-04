@@ -4,6 +4,7 @@ const addMember = async (
   _,
   { memberInput: { kidId, userId, realtion, notification } }
 ) => {
+  console.log("test test");
   const user = await User.findOne({ userId: userId });
   if (user) {
     throw new Error("Family member exist!");
