@@ -1,8 +1,9 @@
 const { gql } = require("apollo-server");
+const resolvers = require("./resolvers");
 
 const typeDefs = gql`
   extend type Mutation {
-    addMember(memberInput: MemberInput): FamilyMember
+    addMember(MemberInput: MemberInput): FamilyMember
   }
 
   type FamilyMember {
@@ -20,8 +21,6 @@ const typeDefs = gql`
     notification: String!
   }
 `;
-
-const resolvers = require("./resolvers");
 
 module.exports = {
   typeDefs: [typeDefs],

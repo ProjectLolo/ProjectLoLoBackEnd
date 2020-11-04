@@ -19,4 +19,4 @@ const addMember = async (
   return { ...result._doc };
 };
 
-module.exports = addMember;
+module.exports = { addMember };
