@@ -1,16 +1,19 @@
 const Kid = require("../../../models/Kid");
+const checkAuth = require("../../../utils/check-auth");
 
 const createKid = async (
   _,
-  { kidInput: { name, nickName, birthdate, profileImageUrl, userId } }
+  { kidInput: { name, nickName, birthdate, profileImageUrl } },
+  context
 ) => {
+  const user = checkAuth(context);
   try {
     const kid = new Kid({
       name,
       nickName,
       birthdate,
       profileImageUrl,
-      userId,
+      userId: user.id,
     });
 
     const result = await kid.save();

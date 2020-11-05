@@ -18,7 +18,6 @@ const typeDefs = gql`
     nickName: String!
     birthdate: String!
     profileImageUrl: String
-    userId: String!
   }
 `;
 
