@@ -15,7 +15,7 @@ const typeDefs = gql`
 
   input MemberInput {
     kidId: String!
-    userId: String!
+
     relation: String!
     notification: String!
   }

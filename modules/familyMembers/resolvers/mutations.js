@@ -1,17 +1,17 @@
 const FamilyMember = require("../../../models/Familymember");
 const User = require("../../../models/User");
+const checkAuth = require("../../../utils/check-auth");
 
 const addMember = async (
   _,
-  { memberInput: { kidId, userId, relation, notification } }
+  { memberInput: { kidId, relation, notification } },
+  context
 ) => {
-  const user = await User.findOne({ userId: userId });
-  if (user) {
-    throw new Error("Family member exist!");
-  }
+  const user = checkAuth(context);
+
   const familyMember = new FamilyMember({
     kidId,
-    userId,
+    userId: user.userId,
     relation,
     notification,
   });
