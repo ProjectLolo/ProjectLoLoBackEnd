@@ -22,12 +22,14 @@ const familyMemberSchema = new Schema({
   createdAt: String,
   modifiedAt: String,
   userId: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
+    type: String,
+    // type: Schema.Types.ObjectId,
+    // ref: "User",
   },
   kidId: {
-    type: Schema.Types.ObjectId,
-    ref: "Kid",
+    type: String,
+    // type: Schema.Types.ObjectId,
+    // ref: "Kid",
   },
 });
 
