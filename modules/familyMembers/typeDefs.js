@@ -6,7 +6,7 @@ const typeDefs = gql`
   }
 
   type FamilyMember {
-    id: ID!
+    _id: ID!
     kidId: String!
     userId: String!
     relation: String!

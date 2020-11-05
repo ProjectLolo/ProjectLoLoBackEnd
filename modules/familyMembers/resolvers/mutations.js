@@ -1,10 +1,10 @@
 const FamilyMember = require("../../../models/Familymember");
+const User = require("../../../models/User");
 
 const addMember = async (
   _,
-  { memberInput: { kidId, userId, realtion, notification } }
+  { memberInput: { kidId, userId, relation, notification } }
 ) => {
-  console.log("test test");
   const user = await User.findOne({ userId: userId });
   if (user) {
     throw new Error("Family member exist!");
@@ -12,7 +12,7 @@ const addMember = async (
   const familyMember = new FamilyMember({
     kidId,
     userId,
-    realtion,
+    relation,
     notification,
   });
   const result = await familyMember.save();

@@ -7,13 +7,14 @@ const createKid = async (
   context
 ) => {
   const user = checkAuth(context);
+  console.log(user);
   try {
     const kid = new Kid({
       name,
       nickName,
       birthdate,
       profileImageUrl,
-      userId: user.id,
+      userId: user.userId,
     });
 
     const result = await kid.save();
