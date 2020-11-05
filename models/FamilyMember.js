@@ -19,25 +19,15 @@ const familyMemberSchema = new Schema({
     enum: ["1", "2", "3"],
     default: 1,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  modifiedAt: {
-    type: Date,
-    default: Date.now,
-  },
+  createdAt: String,
+  modifiedAt: String,
   userId: {
-    type: String,
-    // type: Schema.Types.ObjectId,
-    // ref: 'User',
-    // required:true,
+    type: Schema.Types.ObjectId,
+    ref: "User",
   },
   kidId: {
-    type: String,
-    // type: Schema.Types.ObjectId,
-    // ref:'Kid',
-    // required:true,
+    type: Schema.Types.ObjectId,
+    ref: "Kid",
   },
 });
 

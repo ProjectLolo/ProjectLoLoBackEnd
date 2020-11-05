@@ -1,7 +1,7 @@
 const User = require("../../../models/User");
 const bcrypt = require("bcrypt");
-const { toJWT } = require("../../../utils/jwt")
-const { SECRET_KEY, SALT_ROUNDS} = require("../../../config/constants")
+const { toJWT } = require("../../../utils/jwt");
+const { SECRET_KEY, SALT_ROUNDS } = require("../../../config/constants");
 
 const login = async (_, { loginInput: { email, password } }) => {
   const user = await User.findOne({ email: email });
@@ -12,31 +12,21 @@ const login = async (_, { loginInput: { email, password } }) => {
   if (!isEqual) {
     throw new Error("Password is incorrect!");
   }
-  const token = toJWT(
-    { userId: user.id, email: user.email },
-    SECRET_KEY,
-    {
-      expiresIn: "1h",
-    }
-  );
+  const token = toJWT({ userId: user.id, email: user.email });
   return { userId: user.id, token: token, tokenExpiration: 1 };
-}
+};
 
-const signup = async(_, { 
-  signupInput: { 
-    firstName, 
-    lastName, 
-    nickName, 
-    password, 
-    email
-  }
-}) => {
-    try {
-      const existingUser = await User.findOne({ email: email });
-      if (existingUser) {
-        throw new Error("User exists already.");
-      }
-      const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+const signup = async (
+  _,
+  { signupInput: { firstName, lastName, nickName, password, email } }
+) => {
+  try {
+    console.log("testlogin");
+    const existingUser = await User.findOne({ email: email });
+    if (existingUser) {
+      throw new Error("User exists already.");
+    }
+    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
 
     const user = new User({
       firstName,
@@ -52,6 +42,6 @@ const signup = async(_, {
   } catch (err) {
     throw err;
   }
-}
+};
 
-module.exports = { login, signup }
+module.exports = { login, signup };
