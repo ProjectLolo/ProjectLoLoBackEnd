@@ -12,6 +12,7 @@ const typeDefs = gql`
     birthdate: String!
     profileImageUrl: String
     userId: String!
+    code: String!
   }
   input KidInput {
     name: String!
