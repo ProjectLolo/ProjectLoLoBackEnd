@@ -1,6 +1,10 @@
 const { gql } = require("apollo-server");
 
 const typeDefs = gql`
+  extend type Query {
+    kids: [Kid!]!
+  }
+
   extend type Mutation {
     createKid(kidInput: KidInput): Kid
   }
@@ -12,6 +16,7 @@ const typeDefs = gql`
     birthdate: String!
     profileImageUrl: String
     userId: String!
+    familyMembers: [FamilyMember]
   }
   input KidInput {
     name: String!

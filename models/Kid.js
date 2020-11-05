@@ -31,6 +31,12 @@ const kidSchema = new Schema({
     // ref: 'User',
     // required:true,
   },
+  familyMembers: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "FamilyMember",
+    },
+  ],
 });
 
 module.exports = model("Kid", kidSchema);
