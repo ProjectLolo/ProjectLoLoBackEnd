@@ -1,24 +1,48 @@
-const { model, Schema } = require('mongoose')
+const { model, Schema } = require("mongoose");
 
-const loveBankSchema = new Schema({
-    createdAt: {
-        type: Date,
-        default: Date.now
+const loveBankSchema = new Schema(
+  {
+    title: {
+      type: String,
+      required: true,
     },
-    modifiedAt: {
-        type: Date,
-        default: Date.now
-      },
+    url: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+    },
+    category: {
+      type: String,
+      enum: ["audio", "video", "other"],
+      default: "video",
+    },
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     kidId: {
-        type: Schema.Types.ObjectId,
-        ref:'Kid',
-        required:true,
+      type: Schema.Types.ObjectId,
+      ref: "Kid",
+      required: true,
     },
-    mediaId: {
-        type: Schema.Types.ObjectId,
-        ref:'Media',
-        required:true,
-    },
-})
+    comments: [
+      {
+        userId: { type: Schema.Types.ObjectId },
+        comment: String,
+        createdAt: String,
+      },
+    ],
+    likes: [
+      {
+        userId: { type: Schema.Types.ObjectId },
+        createdAt: String,
+      },
+    ],
+  },
+  { timestamps: true }
+);
 
-module.exports = model('LoveBank', loveBankSchema)
+module.exports = model("LoveBank", loveBankSchema);

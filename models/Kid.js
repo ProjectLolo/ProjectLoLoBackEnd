@@ -1,36 +1,37 @@
-const { model, Schema } = require('mongoose')
+const { model, Schema } = require("mongoose");
 
-const kidSchema = new Schema({
+const kidSchema = new Schema(
+  {
     name: {
-        type: String,
-        required:true,
+      type: String,
+      required: true,
     },
     nickName: {
-        type: String,
+      type: String,
     },
-    birthDate: {
-        type: Date,
+    birthdate: {
+      type: String,
     },
-    profileImageUrl:{
-        type: Text,
+    profileImageUrl: {
+      type: String,
     },
-    code:{
-        type: String,
-        required:true,
+    code: {
+      type: String,
     },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
-    modifiedAt: {
-        type: Date,
-        default: Date.now
-      },
     userId: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required:true,
+      type: String,
+      // type: Schema.Types.ObjectId,
+      // ref: 'User',
+      // required:true,
     },
-})
+    familyMembers: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "FamilyMember",
+      },
+    ],
+  },
+  { timestamps: true }
+);
 
-module.exports = model('Kid', kidSchema)
+module.exports = model("Kid", kidSchema);

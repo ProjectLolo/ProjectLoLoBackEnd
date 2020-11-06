@@ -1,34 +1,37 @@
-const { model, Schema } = require('mongoose')
+const { model, Schema } = require("mongoose");
 
-const familyMemberSchema = new Schema({
+const familyMemberSchema = new Schema(
+  {
     relation: {
-        type: String,
-        enum : ['Father','Mother', 'Grand Father', 'Grand-Mother','Aunt','Uncle', 'Gaurdian'],
-        default: 'Gaurdian',
+      type: String,
+      enum: [
+        "Father",
+        "Mother",
+        "Grand Father",
+        "Grand-Mother",
+        "Aunt",
+        "Uncle",
+        "Gaurdian",
+      ],
+      default: "Gaurdian",
     },
-    notification:{
-        type: Number,
-        enum : [1, 2, 3],
-        default: 1,
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
-    modifiedAt: {
-        type: Date,
-        default: Date.now,
-      },
-    userId: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required:true,
-    },
-    kidId: {
-        type: Schema.Types.ObjectId,
-        ref:'Kid',
-        required:true,
-    },
-})
+    notification: {
+      type: String,
+      enum: ["1", "2", "3"],
 
-module.exports = model('FamilyMember', familyMemberSchema)
+      default: 1,
+    },
+    userId: {
+      type: String,
+      // type: Schema.Types.ObjectId,
+      // ref: "User",
+    },
+    kid: {
+      type: Schema.Types.ObjectId,
+      ref: "Kid",
+    },
+  },
+  { timestamps: true }
+);
+
+module.exports = model("FamilyMember", familyMemberSchema);
