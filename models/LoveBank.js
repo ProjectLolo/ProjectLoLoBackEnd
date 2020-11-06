@@ -3,15 +3,15 @@ const { model, Schema } = require("mongoose");
 const loveBankSchema = new Schema(
   {
     title: {
-      type: Text,
+      type: String,
       required: true,
     },
     url: {
-      type: Text,
+      type: String,
       required: true,
     },
     description: {
-      type: Text,
+      type: String,
     },
     category: {
       type: String,
