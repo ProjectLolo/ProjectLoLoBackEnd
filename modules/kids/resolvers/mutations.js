@@ -1,6 +1,8 @@
 const Kid = require("../../../models/Kid");
 const checkAuth = require("../../../utils/check-auth");
 
+const { generated } = require("../../../generator/codeGenerat");
+
 const createKid = async (
   _,
   { kidInput: { name, nickName, birthdate, profileImageUrl } },
@@ -15,7 +17,11 @@ const createKid = async (
       birthdate,
       profileImageUrl,
       userId: user.userId,
+
+      code: generated(10),
+
       familyMembers: [],
+
     });
 
     const result = await kid.save();

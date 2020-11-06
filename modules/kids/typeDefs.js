@@ -16,7 +16,9 @@ const typeDefs = gql`
     birthdate: String!
     profileImageUrl: String
     userId: String!
+    code: String!
     familyMembers: [FamilyMember]
+
   }
   input KidInput {
     name: String!
