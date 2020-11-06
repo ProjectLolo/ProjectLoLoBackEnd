@@ -26,10 +26,9 @@ const familyMemberSchema = new Schema({
     // type: Schema.Types.ObjectId,
     // ref: "User",
   },
-  kidId: {
-    type: String,
-    // type: Schema.Types.ObjectId,
-    // ref: "Kid",
+  kid: {
+    type: Schema.Types.ObjectId,
+    ref: "Kid",
   },
 });
 

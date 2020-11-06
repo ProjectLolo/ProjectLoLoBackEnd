@@ -17,7 +17,11 @@ const createKid = async (
       birthdate,
       profileImageUrl,
       userId: user.userId,
+
       code: generated(10),
+
+      familyMembers: [],
+
     });
 
     const result = await kid.save();
