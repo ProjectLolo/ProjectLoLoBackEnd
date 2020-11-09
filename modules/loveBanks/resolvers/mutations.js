@@ -20,7 +20,7 @@ const createLoveBank = async (
 
     const result = await loveBank.save();
 
-    return { ...result._doc };
+    return { ...result._doc, user };
   } catch (err) {
     throw err;
   }

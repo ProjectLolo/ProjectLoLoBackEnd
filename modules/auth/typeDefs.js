@@ -36,7 +36,6 @@ const typeDefs = gql`
   }
 `;
 
-
 module.exports = {
   typeDefs: [typeDefs],
   resolvers,

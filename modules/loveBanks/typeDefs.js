@@ -17,8 +17,8 @@ const typeDefs = gql`
     description: String!
     category: String
     userId: ID
-    # comments: [Comment]
-    # likes: [Like]
+    comment: [Comment]
+    like: [Like]
   }
   input LoveBankInput {
     title: String!
@@ -28,13 +28,13 @@ const typeDefs = gql`
     kidId: ID
   }
 
-  # type Comment {
-  #   userId: String
-  #   comment: String
-  # }
-  # type Like {
-  #   userId: String
-  # }
+  type Comment {
+    userId: ID
+    comment: String
+  }
+  type Like {
+    userId: ID
+  }
 `;
 
 module.exports = {
