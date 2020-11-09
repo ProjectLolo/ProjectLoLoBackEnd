@@ -13,6 +13,7 @@ const userSchema = new Schema(
     password: String,
     email: {
       type: String,
+      lowercase: true,
       unique: true,
       required: [true, "Name must not be empty"],
       validate: {
