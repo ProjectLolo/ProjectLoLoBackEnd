@@ -52,5 +52,25 @@ const createComment = async (_, { comment, loveBankId }, context) => {
     return loveBank;
   } else throw new UserInputError("Post not found");
 };
+const likeLoveBank = async (_, { loveBankId }, context) => {
+  const { userId } = checkAuth(context);
 
-module.exports = { createLoveBank, createComment };
+  const loveBank = await LoveBank.findById(loveBankId);
+  if (loveBank) {
+    if (loveBank.likes.find((like) => like.userId == userId)) {
+      // Post already likes, unlike it
+      loveBank.likes = loveBank.likes.filter((like) => like.userId != userId);
+    } else {
+      // Not liked, like loveBank
+      loveBank.likes.push({
+        userId,
+        createdAt: new Date().toISOString(),
+      });
+    }
+
+    await loveBank.save();
+    return loveBank;
+  } else throw new UserInputError("loveBank not found");
+};
+
+module.exports = { createLoveBank, createComment, likeLoveBank };
