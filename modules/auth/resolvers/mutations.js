@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const { toJWT } = require("../../../utils/jwt");
 const { SECRET_KEY, SALT_ROUNDS } = require("../../../config/constants");
 
-const login = async (_, {  email, password  }) => {
+const login = async (_, { email, password }) => {
   const user = await User.findOne({ email: email });
   if (!user) {
     throw new Error("User does not exist!");
@@ -18,27 +18,25 @@ const login = async (_, {  email, password  }) => {
 
 const signup = async (
   _,
-  { signupInput: { firstName, lastName, nickName, password, email } }
+  { signupInput: { firstName, lastName, password, email } }
 ) => {
   try {
-    console.log("testlogin");
     const existingUser = await User.findOne({ email: email });
-    if (existingUser) {
-      throw new Error("User exists already.");
-    }
+    // if (existingUser) {
+    //   throw new Error("User exists already.");
+    // }
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
 
     const user = new User({
       firstName,
       lastName,
-      nickName,
       password: hashedPassword,
       email,
     });
 
     const result = await user.save();
 
-    return { ...result._doc, password: null, _id: result.id };
+    return { ...result._doc, password: null, id: result.id };
   } catch (err) {
     throw err;
   }
