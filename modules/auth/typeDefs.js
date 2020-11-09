@@ -3,7 +3,7 @@ const resolvers = require("./resolvers");
 
 const typeDefs = gql`
   extend type Mutation {
-    login(email: String! password: String!): AuthData
+    login(email: String!, password: String!): AuthData
     signup(signupInput: SignupInput): User
   }
   type AuthData {
@@ -23,8 +23,7 @@ const typeDefs = gql`
     email: String!
     password: String!
     firstName: String!
-    lastName: String!
-    nickName: String!
+    lastName: String
   }
   input LoginInput {
     email: String!
