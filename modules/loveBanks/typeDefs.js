@@ -16,9 +16,9 @@ const typeDefs = gql`
     url: String!
     description: String!
     category: String
-    userId: [User]
-    comments: [Comment]
-    likes: [Like]
+    userId: ID
+    comment: [Comment]
+    like: [Like]
   }
   input LoveBankInput {
     title: String!
@@ -29,11 +29,11 @@ const typeDefs = gql`
   }
 
   type Comment {
-    userId: String
+    userId: ID
     comment: String
   }
   type Like {
-    userId: String
+    userId: ID
   }
 `;
 

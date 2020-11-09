@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const { toJWT } = require("../../../utils/jwt");
 const { SECRET_KEY, SALT_ROUNDS } = require("../../../config/constants");
 
-const login = async (_, { loginInput: { email, password } }) => {
+const login = async (_, {  email, password  }) => {
   const user = await User.findOne({ email: email });
   if (!user) {
     throw new Error("User does not exist!");
@@ -13,7 +13,7 @@ const login = async (_, { loginInput: { email, password } }) => {
     throw new Error("Password is incorrect!");
   }
   const token = toJWT({ userId: user.id, email: user.email });
-  return { userId: user.id, token: token, tokenExpiration: 1 };
+  return { user, token: token, tokenExpiration: 1 };
 };
 
 const signup = async (
