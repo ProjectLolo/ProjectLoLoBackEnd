@@ -5,4 +5,11 @@ const findKidById = async (_, { kidId }) => {
   return result._doc;
 };
 
-module.exports = { findKidById };
+const findAllKids = async (_, { userId }) => {
+  console.log("do i get here");
+  const result = await Kid.find({ userId: userId });
+  console.log("result", result);
+  return result;
+};
+
+module.exports = { findKidById, findAllKids };
