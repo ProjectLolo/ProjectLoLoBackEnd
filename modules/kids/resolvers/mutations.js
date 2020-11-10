@@ -21,7 +21,6 @@ const createKid = async (
       code: generated(10),
 
       familyMembers: [],
-
     });
 
     const result = await kid.save();
