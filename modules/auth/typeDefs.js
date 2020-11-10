@@ -12,6 +12,14 @@ const typeDefs = gql`
       lastName: String!
       profilePic: String!
     ): User
+    setting(
+      email: String
+      password: String
+      firstName: String
+      lastName: String
+      profilePic: String
+      nickName: String
+    ): User
   }
   type AuthData {
     user: User
@@ -27,17 +35,6 @@ const typeDefs = gql`
     nickName: String!
     profilePic: String!
     token: String!
-  }
-  input SignupInput {
-    email: String!
-    password: String!
-    firstName: String!
-    lastName: String!
-    profilePic: String!
-  }
-  input LoginInput {
-    email: String!
-    password: String!
   }
 `;
 
