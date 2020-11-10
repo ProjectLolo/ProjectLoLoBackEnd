@@ -18,9 +18,8 @@ const login = async (_, { email, password }) => {
 
 const signup = async (
   _,
-  {
-    signupInput: { firstName, lastName, nickName, password, email, profilePic },
-  }
+
+  { firstName, lastName, nickName, password, email, profilePic }
 ) => {
   try {
     console.log("testlogin");
