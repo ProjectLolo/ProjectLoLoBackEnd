@@ -21,6 +21,9 @@ const userSchema = new Schema(
         message: (props) => `${props.value} is not a valid email`,
       },
     },
+    profilePic: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

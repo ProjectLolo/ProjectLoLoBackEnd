@@ -6,6 +6,7 @@ const typeDefs = gql`
     firstName: String!
     lastName: String!
     nickName: String!
+    profilePic: String!
     email: String!
     token: String!
     createdAt: String!

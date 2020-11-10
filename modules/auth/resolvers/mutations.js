@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const { toJWT } = require("../../../utils/jwt");
 const { SECRET_KEY, SALT_ROUNDS } = require("../../../config/constants");
 
-const login = async (_, {  email, password  }) => {
+const login = async (_, { email, password }) => {
   const user = await User.findOne({ email: email });
   if (!user) {
     throw new Error("User does not exist!");
@@ -18,7 +18,9 @@ const login = async (_, {  email, password  }) => {
 
 const signup = async (
   _,
-  { signupInput: { firstName, lastName, nickName, password, email } }
+  {
+    signupInput: { firstName, lastName, nickName, password, email, profilePic },
+  }
 ) => {
   try {
     console.log("testlogin");
@@ -34,6 +36,7 @@ const signup = async (
       nickName,
       password: hashedPassword,
       email,
+      profilePic,
     });
 
     const result = await user.save();
