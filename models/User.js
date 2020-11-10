@@ -13,6 +13,7 @@ const userSchema = new Schema(
     password: String,
     email: {
       type: String,
+      lowercase: true,
       unique: true,
       required: [true, "Name must not be empty"],
       validate: {
@@ -20,6 +21,10 @@ const userSchema = new Schema(
         message: (props) => `${props.value} is not a valid email`,
       },
     },
+    profilePic: {
+      type: String,
+    },
+    nickName: String,
   },
   { timestamps: true }
 );

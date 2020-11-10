@@ -7,7 +7,15 @@ const typeDefs = gql`
   }
 
   extend type Mutation {
-    createLoveBank(loveBankInput: LoveBankInput): LoveBank
+    createLoveBank(
+      title: String!
+      url: String!
+      description: String!
+      category: String!
+      kidId: ID
+    ): LoveBank
+    createComment(loveBankId: String!, comment: String!): LoveBank!
+    likeLoveBank(loveBankId: String!): LoveBank!
   }
 
   type LoveBank {
@@ -17,8 +25,8 @@ const typeDefs = gql`
     description: String!
     category: String
     userId: ID
-    comment: [Comment]
-    like: [Like]
+    comments: [Comment]!
+    likes: [Like]
   }
   input LoveBankInput {
     title: String!
@@ -31,6 +39,7 @@ const typeDefs = gql`
   type Comment {
     userId: ID
     comment: String
+    firstName: String
   }
   type Like {
     userId: ID

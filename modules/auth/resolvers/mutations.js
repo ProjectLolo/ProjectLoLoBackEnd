@@ -2,8 +2,9 @@ const User = require("../../../models/User");
 const bcrypt = require("bcrypt");
 const { toJWT } = require("../../../utils/jwt");
 const { SECRET_KEY, SALT_ROUNDS } = require("../../../config/constants");
+const checkAuth = require("../../../utils/check-auth");
 
-const login = async (_, {  email, password  }) => {
+const login = async (_, { email, password }) => {
   const user = await User.findOne({ email: email });
   if (!user) {
     throw new Error("User does not exist!");
@@ -18,30 +19,58 @@ const login = async (_, {  email, password  }) => {
 
 const signup = async (
   _,
-  { signupInput: { firstName, lastName, nickName, password, email } }
+
+  { firstName, lastName, password, email, profilePic }
 ) => {
   try {
-    console.log("testlogin");
     const existingUser = await User.findOne({ email: email });
-    if (existingUser) {
-      throw new Error("User exists already.");
-    }
+    // if (existingUser) {
+    //   throw new Error("User exists already.");
+    // }
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
 
     const user = new User({
       firstName,
       lastName,
-      nickName,
       password: hashedPassword,
       email,
+      profilePic,
     });
 
     const result = await user.save();
+    const token = toJWT({ userId: result.id, email: user.email });
 
-    return { ...result._doc, password: null, _id: result.id };
+    return { ...result._doc, password: null, id: result.id, token };
   } catch (err) {
     throw err;
   }
 };
+const setting = async (
+  _,
+  { firstName, lastName, email, profilePic, nickName, password },
+  context
+) => {
+  const { userId } = checkAuth(context);
+  const user = await User.findById(userId);
+  const existingUser = await User.findOne({ email: email });
+  if (existingUser) {
+    throw new Error("email does exists already.");
+  }
 
-module.exports = { login, signup };
+  if (!user) {
+    throw new Error("user doesn't exist ");
+  }
+  const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+
+  await user.update({
+    firstName,
+    lastName,
+    email,
+    profilePic,
+    nickName,
+    password: hashedPassword,
+  });
+
+  return user;
+};
+module.exports = { login, signup, setting };
