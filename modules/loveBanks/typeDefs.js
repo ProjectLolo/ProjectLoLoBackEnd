@@ -3,13 +3,15 @@ const resolvers = require("./resolvers");
 
 const typeDefs = gql`
   extend type Query {
-    loveBanks: [LoveBank!]!
+    loveBanks(kidId: ID): [LoveBank!]!
+    loveBankById(_id: ID, kidId: ID): LoveBank!
   }
 
   extend type Mutation {
     createLoveBank(
       title: String!
       url: String!
+      preview: String!
       description: String!
       category: String!
       kidId: ID
@@ -23,17 +25,12 @@ const typeDefs = gql`
     title: String!
     url: String!
     description: String!
+    preview: String!
     category: String
-    userId: ID
+    userId: ID!
+    kidId: ID!
     comments: [Comment]!
     likes: [Like]
-  }
-  input LoveBankInput {
-    title: String!
-    url: String!
-    description: String!
-    category: String!
-    kidId: ID
   }
 
   type Comment {
