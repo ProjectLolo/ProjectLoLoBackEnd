@@ -9,7 +9,6 @@ const typeDefs = gql`
       password: String!
       firstName: String!
       lastName: String!
-      nickName: String!
       profilePic: String!
     ): User
   }
@@ -32,7 +31,6 @@ const typeDefs = gql`
     password: String!
     firstName: String!
     lastName: String!
-    nickName: String!
     profilePic: String!
   }
   input LoginInput {

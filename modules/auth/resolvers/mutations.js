@@ -19,20 +19,18 @@ const login = async (_, { email, password }) => {
 const signup = async (
   _,
 
-  { firstName, lastName, nickName, password, email, profilePic }
+  { firstName, lastName, password, email, profilePic }
 ) => {
   try {
-    console.log("testlogin");
     const existingUser = await User.findOne({ email: email });
-    if (existingUser) {
-      throw new Error("User exists already.");
-    }
+    // if (existingUser) {
+    //   throw new Error("User exists already.");
+    // }
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
 
     const user = new User({
       firstName,
       lastName,
-      nickName,
       password: hashedPassword,
       email,
       profilePic,
@@ -40,7 +38,7 @@ const signup = async (
 
     const result = await user.save();
 
-    return { ...result._doc, password: null, _id: result.id };
+    return { ...result._doc, password: null, id: result.id };
   } catch (err) {
     throw err;
   }
