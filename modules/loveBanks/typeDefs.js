@@ -11,7 +11,7 @@ const typeDefs = gql`
     createLoveBank(
       title: String!
       url: String!
-      perview: String!
+      preview: String!
       description: String!
       category: String!
       kidId: ID
@@ -25,7 +25,7 @@ const typeDefs = gql`
     title: String!
     url: String!
     description: String!
-    perview: String!
+    preview: String!
     category: String
     userId: ID!
     kidId: ID!
