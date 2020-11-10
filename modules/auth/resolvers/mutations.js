@@ -18,7 +18,10 @@ const login = async (_, { email, password }) => {
 
 const signup = async (
   _,
-  { signupInput: { firstName, lastName, password, email } }
+
+
+  { firstName, lastName, password, email, profilePic }
+
 ) => {
   try {
     const existingUser = await User.findOne({ email: email });
@@ -32,6 +35,7 @@ const signup = async (
       lastName,
       password: hashedPassword,
       email,
+      profilePic,
     });
 
     const result = await user.save();
