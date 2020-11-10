@@ -19,9 +19,7 @@ const login = async (_, { email, password }) => {
 const signup = async (
   _,
 
-
   { firstName, lastName, password, email, profilePic }
-
 ) => {
   try {
     const existingUser = await User.findOne({ email: email });
@@ -39,8 +37,9 @@ const signup = async (
     });
 
     const result = await user.save();
+    const token = toJWT({ userId: result.id, email: user.email });
 
-    return { ...result._doc, password: null, id: result.id };
+    return { ...result._doc, password: null, id: result.id, token };
   } catch (err) {
     throw err;
   }
