@@ -24,6 +24,7 @@ const userSchema = new Schema(
     profilePic: {
       type: String,
     },
+    nickName: String,
   },
   { timestamps: true }
 );
