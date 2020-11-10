@@ -19,7 +19,9 @@ const login = async (_, { email, password }) => {
 const signup = async (
   _,
 
+
   { firstName, lastName, password, email, profilePic }
+
 ) => {
   try {
     const existingUser = await User.findOne({ email: email });
