@@ -11,6 +11,7 @@ const typeDefs = gql`
     createLoveBank(
       title: String!
       url: String!
+      perview: String!
       description: String!
       category: String!
       kidId: ID
@@ -24,18 +25,12 @@ const typeDefs = gql`
     title: String!
     url: String!
     description: String!
+    perview: String!
     category: String
     userId: ID!
     kidId: ID!
     comments: [Comment]!
     likes: [Like]
-  }
-  input LoveBankInput {
-    title: String!
-    url: String!
-    description: String!
-    category: String!
-    kidId: ID
   }
 
   type Comment {

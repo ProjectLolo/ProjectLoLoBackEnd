@@ -10,6 +10,7 @@ const loveBankSchema = new Schema(
       type: String,
       required: true,
     },
+    perview: String,
     description: {
       type: String,
     },
