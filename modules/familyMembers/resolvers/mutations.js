@@ -25,6 +25,4 @@ const addMember = async (
   return { ...result._doc };
 };
 
-// const setting = async(_, { firstName, lasName, email, profilePic }, context);
-
 module.exports = { addMember };

@@ -2,6 +2,7 @@ const User = require("../../../models/User");
 const bcrypt = require("bcrypt");
 const { toJWT } = require("../../../utils/jwt");
 const { SECRET_KEY, SALT_ROUNDS } = require("../../../config/constants");
+const checkAuth = require("../../../utils/check-auth");
 
 const login = async (_, { email, password }) => {
   const user = await User.findOne({ email: email });
@@ -44,5 +45,32 @@ const signup = async (
     throw err;
   }
 };
+const setting = async (
+  _,
+  { firstName, lastName, email, profilePic, nickName, password },
+  context
+) => {
+  const { userId } = checkAuth(context);
+  const user = await User.findById(userId);
+  const existingUser = await User.findOne({ email: email });
+  if (existingUser) {
+    throw new Error("email does exists already.");
+  }
 
-module.exports = { login, signup };
+  if (!user) {
+    throw new Error("user doesn't exist ");
+  }
+  const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+
+  await user.update({
+    firstName,
+    lastName,
+    email,
+    profilePic,
+    nickName,
+    password: hashedPassword,
+  });
+
+  return user;
+};
+module.exports = { login, signup, setting };
