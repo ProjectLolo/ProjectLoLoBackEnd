@@ -9,7 +9,7 @@ const typeDefs = gql`
 
   extend type Mutation {
     createKid(kidInput: KidInput): Kid!
-    addKidProfileImage(id: String! imageUrl: String!): Kid
+    addKidProfileImage(id: String!, imageUrl: String!): Kid
   }
 
   type Kid {
@@ -19,7 +19,7 @@ const typeDefs = gql`
     birthdate: String!
     profileImageUrl: String
     userId: String!
-    code: String!
+    code: String
     familyMembers: [FamilyMember]
   }
   input KidInput {
