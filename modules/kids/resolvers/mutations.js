@@ -1,7 +1,8 @@
 const Kid = require("../../../models/Kid");
 const checkAuth = require("../../../utils/check-auth");
 
-const { generated } = require("../../../generator/codeGenerat");
+const { generated } = require("../../../utils/generator");
+const e = require("express");
 
 
 const createKid = async (
@@ -11,6 +12,8 @@ const createKid = async (
 ) => {
   const user = checkAuth(context);
 
+  const code = await generated(10);
+  // console.log("code", code);
   try {
     const kid = new Kid({
       name,
@@ -18,9 +21,7 @@ const createKid = async (
       birthdate,
       profileImageUrl,
       userId: user.userId,
-
-      code: generated(10),
-
+      code,
       familyMembers: [],
     });
 

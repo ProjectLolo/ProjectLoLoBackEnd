@@ -9,7 +9,7 @@ const findKidById = async (_, { kidId }) => {
 
 const findAllKids = async (_, { userId }) => {
   console.log("do i get here");
-  const result = await Kid.find({ userId: userId });
+  const result = await Kid.find({ userId });
   console.log("result", result);
   return result;
 };
