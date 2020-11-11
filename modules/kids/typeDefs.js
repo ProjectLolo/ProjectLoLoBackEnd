@@ -8,7 +8,8 @@ const typeDefs = gql`
   }
 
   extend type Mutation {
-    createKid(kidInput: KidInput): Kid
+    createKid(kidInput: KidInput): Kid!
+    addKidProfileImage(id: String! imageUrl: String!): Kid
   }
 
   type Kid {
