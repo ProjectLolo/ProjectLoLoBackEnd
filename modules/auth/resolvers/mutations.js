@@ -13,7 +13,11 @@ const login = async (_, { email, password }) => {
   if (!isEqual) {
     throw new Error("Password is incorrect!");
   }
-  const token = toJWT({ userId: user.id, email: user.email });
+  const token = toJWT({
+    userId: user.id,
+    email: user.email,
+    name: user.firstName,
+  });
   return { user, token: token, tokenExpiration: 1 };
 };
 
