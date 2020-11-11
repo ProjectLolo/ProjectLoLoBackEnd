@@ -33,7 +33,7 @@ const createKid = async (
 };
 
 
-const addKidProfileImage = async (_, {kidProfileImage:{ id, imageUrl }},context) =>{
+const addKidProfileImage = async (_, {id, imageUrl }, context) =>{
   
   const user = checkAuth(context);
 
