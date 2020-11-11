@@ -7,6 +7,8 @@ const { MONGODB, PORT } = require("./config/constants");
 const server = new ApolloServer({
   schema,
   context: ({ req }) => ({ req }),
+  introspection: true,
+  playground: true,
 });
 
 mongoose.connect(MONGODB, { useNewUrlParse: true }).then(() => {
