@@ -6,7 +6,11 @@ const typeDefs = gql`
   }
 
   extend type Mutation {
-    addMember(memberInput: MemberInput): FamilyMember
+    addMember(
+      kidId: String!
+      relation: String!
+      notification: String!
+    ): FamilyMember!
   }
 
   type FamilyMember {
@@ -15,12 +19,6 @@ const typeDefs = gql`
     relation: String!
     notification: String!
     kid: Kid!
-  }
-
-  input MemberInput {
-    kidId: String!
-    relation: String!
-    notification: String!
   }
 `;
 
