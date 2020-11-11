@@ -4,6 +4,7 @@ const typeDefs = gql`
   extend type Query {
     findKidById(kidId: String!): Kid!
     findAllKids(userId: String!): [Kid!]
+    findKidByCode(code: String!): Kid!
   }
 
   extend type Mutation {
