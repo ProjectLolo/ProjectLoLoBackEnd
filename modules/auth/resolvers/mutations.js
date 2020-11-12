@@ -77,4 +77,55 @@ const setting = async (
 
   return user;
 };
+
+const addUserProfileImage = async (_, { id, imageUrl }, context) => {
+  const user = checkAuth(context);
+
+  try {
+    if (!user) {
+      console.log("User not authenticated!");
+      throw new Error("User not authenticated");
+    }
+
+    if (!id) {
+      console.log("Please provide user Id");
+      throw new Error("Please provide user Id");
+    }
+
+    const userFound = await User.findById(id);
+    console.log("kidDate:", userFound);
+
+    if (!userFound) {
+      throw new Error(`Couldn’t find user with id ${id}`);
+    }
+
+    userFound.profilePic = imageUrl;
+    console.log("updated:", userFound);
+
+    const result = await userFound.save();
+
+    return { ...result._doc, password: null };
+  } catch (error) {
+    console.log("addKidProfile mutation error:", error);
+    throw error;
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = { login, signup, setting };

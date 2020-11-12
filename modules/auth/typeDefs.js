@@ -20,6 +20,7 @@ const typeDefs = gql`
       profilePic: String
       nickName: String
     ): User
+    addUserProfileImage(id: String!, imageUrl: String!): User!
   }
   type AuthData {
     user: User
