@@ -4,7 +4,7 @@ const checkAuth = require("../../../utils/check-auth");
 
 const addMember = async (
   _,
-  { memberInput: { kidId, relation, notification } },
+   { kidId, relation, notification } ,
   context
 ) => {
   const user = checkAuth(context);
