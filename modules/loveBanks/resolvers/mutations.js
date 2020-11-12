@@ -4,7 +4,7 @@ const checkAuth = require("../../../utils/check-auth");
 
 const createLoveBank = async (
   _,
-  { title, url, preview, description, category, kidId },
+  { title, url, preview, description, category, type, kidId },
   context
 ) => {
   const user = checkAuth(context);
@@ -14,6 +14,7 @@ const createLoveBank = async (
       title,
       url,
       description,
+      type,
       category,
       kidId,
       preview,
