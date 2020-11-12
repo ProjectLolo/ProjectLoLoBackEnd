@@ -14,7 +14,13 @@ const loveBankSchema = new Schema(
     description: {
       type: String,
     },
+
     category: {
+      type: String,
+      enum: ["fun", "memory", "activate","teach","sing","read","share"],
+      default: "",
+    },
+    type: {
       type: String,
       enum: ["audio", "video", "other"],
       default: "video",
