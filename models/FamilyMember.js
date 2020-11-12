@@ -11,13 +11,13 @@ const familyMemberSchema = new Schema(
         "Grand-Mother",
         "Aunt",
         "Uncle",
-        "Gaurdian",
+        "Guardian",
       ],
-      default: "Gaurdian",
+      default: "Guardian",
     },
     notification: {
       type: String,
-      enum: ["1", "2", "3"],
+      enum: ["0","1", "2", "3"],
 
       default: 1,
     },
