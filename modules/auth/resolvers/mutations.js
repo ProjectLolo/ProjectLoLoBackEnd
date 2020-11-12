@@ -51,15 +51,14 @@ const signup = async (
 };
 const setting = async (
   _,
-  { firstName, lastName, email, profilePic, nickName, password },
+  { firstName, lastName, profilePic, nickName, password },
   context
 ) => {
+  if (!firstName || !lastName || !password) {
+    throw new Error("Please fill the form");
+  }
   const { userId } = checkAuth(context);
   const user = await User.findById(userId);
-  const existingUser = await User.findOne({ email: email });
-  if (existingUser) {
-    throw new Error("email does exists already.");
-  }
 
   if (!user) {
     throw new Error("user doesn't exist ");
@@ -69,7 +68,6 @@ const setting = async (
   await user.update({
     firstName,
     lastName,
-    email,
     profilePic,
     nickName,
     password: hashedPassword,
