@@ -42,7 +42,11 @@ const signup = async (
     });
 
     const result = await user.save();
-    const token = toJWT({ userId: result.id, email: user.email });
+    const token = toJWT({
+      userId: result.id,
+      email: user.email,
+      name: user.firstName,
+    });
 
     return { ...result._doc, password: null, id: result.id, token };
   } catch (err) {
@@ -108,22 +112,5 @@ const addUserProfileImage = async (_, { id, imageUrl }, context) => {
     throw error;
   }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 module.exports = { login, signup, setting };
