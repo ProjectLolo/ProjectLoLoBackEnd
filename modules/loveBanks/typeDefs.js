@@ -4,7 +4,7 @@ const resolvers = require("./resolvers");
 const typeDefs = gql`
   extend type Query {
     loveBanks(kidId: ID): [LoveBank!]!
-    loveBankById(_id: ID, kidId: ID): LoveBank!
+    loveBankById(_id: ID, kidId: ID): LoveBank
   }
 
   extend type Mutation {
@@ -41,6 +41,10 @@ const typeDefs = gql`
   }
   type Like {
     userId: ID
+  }
+
+  type Subscription {
+    LoveBank(_id: ID!): LoveBank
   }
 `;
 
