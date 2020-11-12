@@ -28,9 +28,9 @@ const signup = async (
 ) => {
   try {
     const existingUser = await User.findOne({ email: email });
-    // if (existingUser) {
-    //   throw new Error("User exists already.");
-    // }
+    if (existingUser) {
+      throw new Error("User with that email already exists.");
+    }
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
 
     const user = new User({
@@ -113,4 +113,4 @@ const addUserProfileImage = async (_, { id, imageUrl }, context) => {
   }
 };
 
-module.exports = { login, signup, setting };
+module.exports = { login, signup, setting, addUserProfileImage };
