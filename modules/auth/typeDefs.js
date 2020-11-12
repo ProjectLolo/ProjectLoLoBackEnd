@@ -13,13 +13,13 @@ const typeDefs = gql`
       profilePic: String!
     ): User
     setting(
-      email: String
-      password: String
-      firstName: String
-      lastName: String
-      profilePic: String
-      nickName: String
+      password: String!
+      firstName: String!
+      lastName: String!
+      profilePic: String!
+      nickName: String!
     ): User
+    addUserProfileImage(id: String!, imageUrl: String!): User!
   }
   type AuthData {
     user: User

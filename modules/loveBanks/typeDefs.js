@@ -12,6 +12,7 @@ const typeDefs = gql`
       title: String!
       url: String!
       preview: String!
+      type:String!
       description: String!
       category: String!
       kidId: ID
@@ -26,6 +27,7 @@ const typeDefs = gql`
     url: String!
     description: String!
     preview: String
+    type:String
     category: String
     userId: ID!
     kidId: ID!
