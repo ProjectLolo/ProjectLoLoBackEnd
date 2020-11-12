@@ -17,14 +17,12 @@ const familyMemberSchema = new Schema(
     },
     notification: {
       type: String,
-      enum: ["0","1", "2", "3"],
+      enum: ["0", "1", "2", "3"],
 
       default: 1,
     },
     userId: {
       type: String,
-      // type: Schema.Types.ObjectId,
-      // ref: "User",
     },
     kid: {
       type: Schema.Types.ObjectId,
