@@ -23,7 +23,7 @@ const createKid = async (
         nickName,
         birthdate,
         profileImageUrl,
-        userId: user.userId,
+        user: user.userId,
         code,
         familyMembers: [],
       });
@@ -98,6 +98,7 @@ const updateKidProfile = async (_, { id, name, nickName, birthdate, profileImage
       kid.nickName=nickName,
       kid.birthdate=birthdate,
       kid.profileImageUrl=profileImageUrl,
+      kid.user = user.id
 
       console.log("updated:", kid);
 

@@ -18,11 +18,10 @@ const kidSchema = new Schema(
     code: {
       type: String,
     },
-    userId: {
-      type: String,
-      // type: Schema.Types.ObjectId,
-      // ref: 'User',
-      // required:true,
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required:true,
     },
     familyMembers: [
       {
