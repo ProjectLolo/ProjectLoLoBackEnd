@@ -20,6 +20,12 @@ const typeDefs = gql`
     notification: String!
     kid: Kid!
   }
+
+  input MemberInput {
+    kidId: String!
+    relation: String!
+    notification: String!
+  }
 `;
 
 const resolvers = require("./resolvers");
