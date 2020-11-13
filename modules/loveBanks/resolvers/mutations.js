@@ -30,7 +30,8 @@ const createLoveBank = async (
 };
 
 const createComment = async (_, { comment, loveBankId }, context) => {
-  const { userId, firstName } = checkAuth(context);
+  const { userId, name } = checkAuth(context);
+  console.log("NAME????", name);
   if (comment.trim() === "") {
     throw new UserInputError("Empty comment", {
       errors: {
@@ -45,7 +46,7 @@ const createComment = async (_, { comment, loveBankId }, context) => {
     loveBank.comments.unshift({
       comment,
       userId,
-      firstName,
+      firstName: name,
       createdAt: new Date().toISOString(),
     });
     await loveBank.save();

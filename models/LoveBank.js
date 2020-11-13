@@ -17,7 +17,7 @@ const loveBankSchema = new Schema(
 
     category: {
       type: String,
-      enum: ["fun", "memory", "activate","teach","sing","read","share"],
+      enum: ["fun", "memory", "activate", "teach", "sing", "read", "share"],
       default: "",
     },
     type: {
@@ -39,6 +39,7 @@ const loveBankSchema = new Schema(
       {
         userId: { type: Schema.Types.ObjectId },
         comment: String,
+        firstName: String,
         createdAt: String,
       },
     ],
