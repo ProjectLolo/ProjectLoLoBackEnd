@@ -2,11 +2,13 @@ const FamilyMember = require("../../../models/FamilyMember");
 const Kid = require("../../../models/Kid");
 const checkAuth = require("../../../utils/check-auth");
 
+
 const addMember = async (
   _,
    { kidId, relation, notification } ,
   context
 ) => {
+
   const user = checkAuth(context);
 
   const familyMember = new FamilyMember({

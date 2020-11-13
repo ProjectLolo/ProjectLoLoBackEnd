@@ -36,6 +36,7 @@ const typeDefs = gql`
   }
 
   type Comment {
+    _id: ID
     userId: ID
     comment: String
     firstName: String
