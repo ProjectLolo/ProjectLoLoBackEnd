@@ -12,7 +12,7 @@ const typeDefs = gql`
       title: String!
       url: String!
       preview: String!
-      type:String!
+      type: String!
       description: String!
       category: String!
       kidId: ID
@@ -27,7 +27,7 @@ const typeDefs = gql`
     url: String!
     description: String!
     preview: String
-    type:String
+    type: String
     category: String
     userId: ID!
     kidId: ID!
@@ -40,6 +40,7 @@ const typeDefs = gql`
     userId: ID
     comment: String
     firstName: String
+    createdAt: String
   }
   type Like {
     userId: ID
