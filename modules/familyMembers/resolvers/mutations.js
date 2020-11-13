@@ -7,7 +7,7 @@ const addMember = async (_, { kidId, relation, notification }, context) => {
 
   try {
     const member = await FamilyMember.find({ userId: user.userId, kidId });
-    console.log(member);
+
     if (member.length > 0) {
       throw new Error("cannot create duplicate familymember");
     }
