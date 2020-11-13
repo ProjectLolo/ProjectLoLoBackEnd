@@ -1,7 +1,8 @@
 const mutations = require("./mutations");
+const queries = require("./queries");
 
 const resolvers = {
-  Query: {},
+  Query: { ...queries },
   Mutation: {
     ...mutations,
   },
