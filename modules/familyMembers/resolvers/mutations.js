@@ -2,29 +2,32 @@ const FamilyMember = require("../../../models/FamilyMember");
 const Kid = require("../../../models/Kid");
 const checkAuth = require("../../../utils/check-auth");
 
-
-const addMember = async (
-  _,
-   { kidId, relation, notification } ,
-  context
-) => {
-
+const addMember = async (_, { kidId, relation, notification }, context) => {
   const user = checkAuth(context);
 
-  const familyMember = new FamilyMember({
-    userId: user.userId,
-    relation,
-    notification,
-    kid: kidId,
-  });
+  try {
+    const member = await FamilyMember.find({ userId: user.userId, kidId });
+    console.log(member);
+    if (member.length > 0) {
+      throw new Error("cannot create duplicate familymember");
+    }
 
-  const result = await familyMember.save();
+    const familyMember = new FamilyMember({
+      userId: user.userId,
+      relation,
+      notification,
+      kid: kidId,
+    });
 
-  const kidRecord = await Kid.findById(kidId);
-  kidRecord.familyMembers.push(familyMember);
-  await kidRecord.save();
+    const result = await familyMember.save();
 
-  return { ...result._doc };
+    const kidRecord = await Kid.findById(kidId);
+    kidRecord.familyMembers.push(familyMember);
+    await kidRecord.save();
+
+    return { ...result._doc };
+  } catch (error) {
+    console.log(error);
+  }
 };
-
 module.exports = { addMember };
