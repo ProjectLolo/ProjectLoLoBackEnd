@@ -3,9 +3,13 @@ const { AuthenticationError } = require("apollo-server");
 const jwt = require("jsonwebtoken");
 const { SECRET_KEY } = require("../config/constants");
 
-module.exports = (context) => {
+module.exports = (context, connectionParams, sub) => {
   // context = { ... headers }
-  const authHeader = context.req.headers.authorization;
+  console.log("sub", sub);
+
+  const authHeader = !sub
+    ? context.req.headers.authorization
+    : connectionParams;
   if (authHeader) {
     // Bearer ....
     const token = authHeader.split("Bearer ")[1];
