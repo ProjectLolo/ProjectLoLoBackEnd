@@ -1,6 +1,7 @@
 const { ApolloServer } = require("apollo-server");
 const mongoose = require("mongoose");
 const schema = require("./modules");
+const checkAuthWs = require("./utils/check-auth-ws");
 
 const { MONGODB, PORT } = require("./config/constants");
 
@@ -9,6 +10,22 @@ const server = new ApolloServer({
   context: ({ req }) => ({ req }),
   introspection: true,
   playground: true,
+  subscriptions: {
+    onConnect: (connectionParams, webSocket, context) => {
+      console.log("on connect", connectionParams.authorization);
+      if (connectionParams.authorization) {
+        const user = checkAuthWs(connectionParams.authorization);
+        return user;
+      }
+      throw new Error("Missing auth token!");
+    },
+    onDisconnect: (webSocket, context) => {
+      console.log(
+        new Date().toLocaleTimeString("de-DE"),
+        "subscriptions:onDisconnect"
+      );
+    },
+  },
 });
 
 mongoose
