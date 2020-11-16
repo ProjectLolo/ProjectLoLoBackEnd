@@ -18,7 +18,7 @@ const login = async (_, { email, password }) => {
     email: user.email,
     name: user.firstName,
   });
-  return { user, token: token, tokenExpiration: 1 };
+  return { user, token: token, tokenExpiration: 100 * 100 };
 };
 
 const signup = async (

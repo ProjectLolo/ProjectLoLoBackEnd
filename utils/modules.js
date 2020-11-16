@@ -5,6 +5,7 @@ const scalars = require("../scalars");
 const globalTypeDefs = gql`
   type Query
   type Mutation
+  type Subscription
 `;
 
 const makeExecutableSchemaFromModules = ({ modules }) => {

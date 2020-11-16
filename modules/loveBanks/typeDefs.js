@@ -21,6 +21,11 @@ const typeDefs = gql`
     likeLoveBank(loveBankId: String!): LoveBank!
   }
 
+  extend type Subscription {
+    newComment: LoveBank
+    newLIke(LoveBankId: String!): LoveBank
+  }
+
   type LoveBank {
     _id: ID!
     title: String!
@@ -31,7 +36,7 @@ const typeDefs = gql`
     category: String
     userId: ID!
     kidId: ID!
-    comments: [Comment]!
+    comments: [Comment]
     likes: [Like]
   }
 

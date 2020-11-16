@@ -1,6 +1,7 @@
 const { AuthenticationError, UserInputError } = require("apollo-server");
 const LoveBank = require("../../../models/LoveBank");
 const checkAuth = require("../../../utils/check-auth");
+const { pubsub } = require("../../helper");
 
 const createLoveBank = async (
   _,
@@ -51,10 +52,16 @@ const createComment = async (_, { comment, loveBankId }, context) => {
     });
     await loveBank.save();
 
-    console.log(loveBank);
+    // currently sending ALL comments associated to this loveBank back in subscription
+
+    pubsub.publish("loveBank", {
+      newComment: loveBank,
+    });
+
     return loveBank;
   } else throw new UserInputError("Post not found");
 };
+
 const likeLoveBank = async (_, { loveBankId }, context) => {
   const { userId } = checkAuth(context);
 
