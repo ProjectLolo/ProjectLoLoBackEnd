@@ -1,4 +1,5 @@
 const Kid = require("../../../models/Kid");
+const FamilyMember = require("../../../models/FamilyMember");
 const checkAuth = require("../../../utils/check-auth");
 const { AuthenticationError, UserInputError } = require("apollo-server");
 
@@ -7,8 +8,16 @@ const findKidById = async (_, { kidId }) => {
   return result._doc;
 };
 
-const findAllKids = async (_, { userId }) => {
-  const result = await Kid.find({ userId });
+const findAllKids = async (_, userId) => {
+  const kids = await Kid.find(userId);
+
+  const member = await FamilyMember.find(userId).populate("kid");
+
+  const kidMembers = member.map((kid) => {
+    return kid.kid;
+  });
+
+  const result = [].concat(kids, kidMembers);
 
   return result;
 };
