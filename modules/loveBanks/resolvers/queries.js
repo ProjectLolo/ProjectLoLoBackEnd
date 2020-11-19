@@ -5,7 +5,6 @@ const loveBanks = async (_, { kidId }, context) => {
   try {
     const { userId } = checkAuth(context);
     const loveBank = await LoveBank.find({
-      userId: userId,
       kidId: kidId,
     });
     return loveBank;
