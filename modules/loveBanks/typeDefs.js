@@ -29,7 +29,7 @@ const typeDefs = gql`
     preview: String
     type: String
     category: String
-    userId: ID!
+    userId: User!
     kidId: ID!
     comments: [Comment]!
     likes: [Like]

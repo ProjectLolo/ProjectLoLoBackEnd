@@ -6,7 +6,7 @@ const loveBanks = async (_, { kidId }, context) => {
     const { userId } = checkAuth(context);
     const loveBank = await LoveBank.find({
       kidId: kidId,
-    });
+    }).populate("userId");
     return loveBank;
   } catch (err) {
     throw err;
