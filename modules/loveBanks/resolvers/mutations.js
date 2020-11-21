@@ -76,4 +76,33 @@ const likeLoveBank = async (_, { loveBankId }, context) => {
   } else throw new UserInputError("loveBank not found");
 };
 
-module.exports = { createLoveBank, createComment, likeLoveBank };
+const deleteLoveBank = async (_, { loveBankId }, context) => {
+  const user = checkAuth(context);
+
+  try {
+    const loveBank = await LoveBank.findById(loveBankId);
+
+    if (loveBank) {
+      const lovebankIdString = loveBank.userId.toString();
+
+      if (lovebankIdString !== user.userId) {
+        throw new Error(`Cannot complete the request`);
+      } else {
+        const deletedLovebank = await LoveBank.findByIdAndDelete(loveBankId);
+        return deletedLovebank;
+      }
+    } else {
+      throw new Error(`Couldn’t find content with that id`);
+    }
+  } catch (error) {
+    console.log("Delete lovebank mutation error:", error);
+    throw error;
+  }
+};
+
+module.exports = {
+  createLoveBank,
+  createComment,
+  likeLoveBank,
+  deleteLoveBank,
+};

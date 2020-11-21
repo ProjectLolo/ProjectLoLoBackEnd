@@ -19,6 +19,7 @@ const typeDefs = gql`
     ): LoveBank
     createComment(loveBankId: String!, comment: String!): LoveBank!
     likeLoveBank(loveBankId: String!): LoveBank!
+    deleteLoveBank(loveBankId: String!): LoveBank!
   }
 
   type LoveBank {
