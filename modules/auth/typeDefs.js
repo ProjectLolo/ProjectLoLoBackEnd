@@ -20,7 +20,6 @@ const typeDefs = gql`
       firstName: String!
       lastName: String!
       profilePic: String!
-      nickName: String!
     ): User
     addUserProfileImage(id: String!, imageUrl: String!): User!
   }
@@ -30,14 +29,13 @@ const typeDefs = gql`
     tokenExpiration: String!
   }
   type User {
-    id: ID
+    _id: ID
     email: String!
     password: String!
     firstName: String!
     lastName: String!
-    nickName: String
     profilePic: String!
-    token: String!
+    token: String
   }
 `;
 
