@@ -35,7 +35,7 @@ const typeDefs = gql`
     password: String!
     firstName: String!
     lastName: String!
-    nickName: String!
+    nickName: String
     profilePic: String!
     token: String!
   }
