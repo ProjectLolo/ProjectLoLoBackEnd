@@ -72,7 +72,11 @@ const addKidProfileImage = async (_, { id, imageUrl }, context) => {
   }
 };
 
-const updateKidProfile = async (_, { id, name, nickName, birthdate, profileImageUrl }, context) => {
+const updateKidProfile = async (
+  _,
+  { id, name, nickName, birthdate, profileImageUrl },
+  context
+) => {
   const user = checkAuth(context);
 
   try {
@@ -92,20 +96,16 @@ const updateKidProfile = async (_, { id, name, nickName, birthdate, profileImage
     if (!kid) {
       throw new Error(`Couldn’t find Kid with id ${id}`);
     }
-    
-    
-      kid.name=name,
-      kid.nickName=nickName,
-      kid.birthdate=birthdate,
-      kid.profileImageUrl=profileImageUrl,
 
+    (kid.name = name),
+      (kid.nickName = nickName),
+      (kid.birthdate = birthdate),
+      (kid.profileImageUrl = profileImageUrl),
       console.log("updated:", kid);
 
     const result = await kid.save();
 
-    return { ...result._doc }
-  
-
+    return { ...result._doc };
   } catch (error) {
     console.log("updateKidProfile mutation error:", error);
     throw error;

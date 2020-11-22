@@ -30,12 +30,12 @@ const typeDefs = gql`
     tokenExpiration: String!
   }
   type User {
-    id: ID!
+    _id: ID!
     email: String!
     password: String!
     firstName: String!
     lastName: String!
-    nickName: String!
+    nickName: String
     profilePic: String!
     token: String!
   }
