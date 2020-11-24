@@ -14,7 +14,7 @@ const login = async (_, { email, password }) => {
     throw new Error("Password is incorrect!");
   }
   const token = toJWT({
-    userId: user.id,
+    userId: user._id,
     email: user.email,
     name: user.firstName,
   });
@@ -43,19 +43,19 @@ const signup = async (
 
     const result = await user.save();
     const token = toJWT({
-      userId: result.id,
+      userId: result._id,
       email: user.email,
       name: user.firstName,
     });
 
-    return { ...result._doc, password: null, id: result.id, token };
+    return { ...result._doc, password: null, id: result._id, token };
   } catch (err) {
     throw err;
   }
 };
 const setting = async (
   _,
-  { firstName, lastName, profilePic, nickName, password },
+  { firstName, lastName, profilePic, password },
   context
 ) => {
   if (!firstName || !lastName || !password) {
@@ -73,7 +73,6 @@ const setting = async (
     firstName,
     lastName,
     profilePic,
-    nickName,
     password: hashedPassword,
   });
 
