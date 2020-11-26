@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const { toJWT } = require("../../../utils/jwt");
 const { SECRET_KEY, SALT_ROUNDS } = require("../../../config/constants");
 const checkAuth = require("../../../utils/check-auth");
+const {sendMail} = require("../../../utils/nodeMailer")
 
 const login = async (_, { email, password }) => {
   const user = await User.findOne({ email: email });
@@ -39,14 +40,16 @@ const signup = async (
       password: hashedPassword,
       email,
       profilePic,
-    });
+    })
 
-    const result = await user.save();
+    const result = await user.save()
     const token = toJWT({
       userId: result._id,
       email: user.email,
       name: user.firstName,
-    });
+    })
+
+    sendMail(result.email, result.firstName, "Thanks for signin up!")
 
     return { ...result._doc, password: null, id: result._id, token };
   } catch (err) {
