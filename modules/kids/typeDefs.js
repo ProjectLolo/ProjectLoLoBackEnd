@@ -11,7 +11,7 @@ const typeDefs = gql`
     createKid(kidInput: KidInput): Kid!
     addKidProfileImage(id: String!, imageUrl: String!): Kid!
     updateKidProfile(
-      _id: String!
+      id: String!
       name: String!
       nickName: String!
       birthdate: String!
