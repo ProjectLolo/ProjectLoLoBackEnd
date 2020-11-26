@@ -80,6 +80,7 @@ const setting = async (
     profilePic,
     password: hashedPassword,
   });
+  sendMail(user.email, user.firstName, `Your details have been changed!` , passwordResetText(user.firstName))
 
   return user;
 };
