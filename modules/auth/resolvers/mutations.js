@@ -3,6 +3,9 @@ const bcrypt = require("bcrypt");
 const { toJWT } = require("../../../utils/jwt");
 const { SECRET_KEY, SALT_ROUNDS } = require("../../../config/constants");
 const checkAuth = require("../../../utils/check-auth");
+const {sendMail} = require("../../../utils/nodeMailer")
+const {signUpText, suggestionText, passwordResetText} = require("../../../utils/email")
+
 
 const login = async (_, { email, password }) => {
   const user = await User.findOne({ email: email });
@@ -39,14 +42,16 @@ const signup = async (
       password: hashedPassword,
       email,
       profilePic,
-    });
+    })
 
-    const result = await user.save();
+    const result = await user.save()
     const token = toJWT({
       userId: result._id,
       email: user.email,
       name: user.firstName,
-    });
+    })
+
+    sendMail(result.email, result.firstName, "Thanks for signin up!", signUpText(result.firstName))
 
     return { ...result._doc, password: null, id: result._id, token };
   } catch (err) {
@@ -75,8 +80,28 @@ const setting = async (
     profilePic,
     password: hashedPassword,
   });
+  sendMail(user.email, user.firstName, `Your details have been changed!` , passwordResetText(user.firstName))
 
   return user;
+};
+
+const suggestion = async (
+  _,
+  { suggestion },
+  context
+) => {
+  if (!suggestion) {
+    throw new Error("Please fill the form");
+  }
+  const { userId } = checkAuth(context);
+  const user = await User.findById(userId);
+
+  if (!user) {
+    throw new Error("user doesn't exist ");
+  }
+
+  sendMail(user.email, user.firstName, `Suggestion made by ${user.email}` , suggestionText(user.firstName, user.email, suggestion))
+  return "succes"
 };
 
 const addUserProfileImage = async (_, { id, imageUrl }, context) => {
@@ -112,4 +137,4 @@ const addUserProfileImage = async (_, { id, imageUrl }, context) => {
   }
 };
 
-module.exports = { login, signup, setting, addUserProfileImage };
+module.exports = { login, signup, setting, addUserProfileImage, suggestion };

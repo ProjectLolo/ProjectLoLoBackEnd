@@ -22,7 +22,7 @@ const loveBankSchema = new Schema(
     },
     type: {
       type: String,
-      enum: ["audio", "video", "other"],
+      enum: ["audio", "video", "other", "picture"],
       default: "video",
     },
     userId: {
