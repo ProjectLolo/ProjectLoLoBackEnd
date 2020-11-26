@@ -7,7 +7,6 @@ module.exports = {
   MONGODB: process.env.MONGODB || 'mongodb+srv://CodaisseurTeam:CodaisseurAlumni@clusterprojectlolo.zqlc0.mongodb.net/ClusterProjectLoLo?retryWrites=true&w=majority',
   SECRET_KEY: process.env.SECRET_KEY || "e9rp^&^*&@9sejg)DSUA)jpfds8394jdsfn,m",
   SECRET_CODE: process.env.SECRET_CODE || "ABCDEFGHIJKLMNOPQRSTUVWZYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()+",
-  SENDGRID: process.env.SENDGRID,
   MAILJETKEYUSER: process.env.MAILJETKEYUSER,
   MAILJETKEYPASS: process.env.MAILJETKEYPASS,
   MAILPORT: process.env.MAILPORT
