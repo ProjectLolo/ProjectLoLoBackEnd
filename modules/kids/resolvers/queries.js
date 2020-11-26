@@ -23,10 +23,11 @@ const findKidById = async (_, { kidId }, context) => {
   } else return result._doc;
 };
 
-const findAllKids = async (_, userId) => {
-  const kids = await Kid.find(userId);
+const findAllKids = async (_, __, context) => {
+  const { userId } = checkAuth(context);
+  const kids = await Kid.find({ userId });
 
-  const member = await FamilyMember.find(userId).populate("kid");
+  const member = await FamilyMember.find({ userId }).populate("kid");
 
   const kidMembers = member.map((kid) => {
     return kid.kid;
