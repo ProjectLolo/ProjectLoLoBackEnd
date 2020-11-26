@@ -4,9 +4,11 @@ const resolvers = require("./resolvers");
 const typeDefs = gql`
   extend type Query {
     findUserById(id: String!): User!
+    
   }
   extend type Mutation {
     login(email: String!, password: String!): AuthData
+    suggestion(suggestion: String!): String!
 
     signup(
       email: String!
