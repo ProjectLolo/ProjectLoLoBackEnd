@@ -3,9 +3,24 @@ const FamilyMember = require("../../../models/FamilyMember");
 const checkAuth = require("../../../utils/check-auth");
 const { AuthenticationError, UserInputError } = require("apollo-server");
 
-const findKidById = async (_, { kidId }) => {
-  const result = await Kid.findById(kidId).populate("familyMembers");
-  return result._doc;
+const findKidById = async (_, { kidId }, context) => {
+  const { userId } = checkAuth(context);
+  const result = await Kid.findById(kidId).populate({
+    path: "familyMembers",
+    populate: {
+      path: "userId",
+      model: "User",
+    },
+  });
+  console.log(result);
+
+  if (userId !== result.userId) {
+    throw new UserInputError("user access field", {
+      errors: {
+        comment: "you don't access to kid circle setting",
+      },
+    });
+  } else return result._doc;
 };
 
 const findAllKids = async (_, userId) => {

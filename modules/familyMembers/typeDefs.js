@@ -15,7 +15,7 @@ const typeDefs = gql`
 
   type FamilyMember {
     _id: ID!
-    userId: String!
+    userId: User
     relation: String!
     notification: String!
     kid: Kid!
