@@ -3,19 +3,19 @@ const { gql } = require("apollo-server");
 const typeDefs = gql`
   extend type Query {
     findKidById(kidId: String!): Kid!
-    findAllKids(userId: String!): [Kid!]
+    findAllKids: [Kid!]
     findKidByCode(code: String!): Kid!
   }
 
   extend type Mutation {
     createKid(kidInput: KidInput): Kid!
-    addKidProfileImage(id: String!, imageUrl: String!): Kid!
+    addKidProfileImage(id: String!, imageUrl: String): Kid!
     updateKidProfile(
       id: String!
       name: String!
       nickName: String!
       birthdate: String!
-      profileImageUrl: String!
+      profileImageUrl: String
     ): Kid!
   }
 
