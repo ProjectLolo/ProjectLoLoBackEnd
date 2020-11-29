@@ -1,4 +1,5 @@
 const FamilyMember = require("../../../models/FamilyMember");
+const { UserInputError } = require("apollo-server");
 const Kid = require("../../../models/Kid");
 const checkAuth = require("../../../utils/check-auth");
 
@@ -33,4 +34,26 @@ const addMember = async (_, { kidId, relation, notification }, context) => {
     console.log(error);
   }
 };
-module.exports = { addMember };
+
+const deleteMember = async (
+  _,
+  {  _id },
+  context
+) => {
+  const user = checkAuth(context);
+  const familyMember = await FamilyMember.findOne({_id: _id});
+  console.log("mutation", familyMember)
+  try {
+    if (familyMember) {
+      console.log("mutation familyMember exists")
+      await FamilyMember.deleteOne({ _id: _id })
+      return `${familyMember._id} deleted!`
+      return 
+    } else {
+      throw new UserInputError("FamilyMember not found");
+    }
+  } catch (err) {
+    throw err;
+  }
+};
+module.exports = { addMember, deleteMember };
