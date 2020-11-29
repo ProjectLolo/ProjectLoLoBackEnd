@@ -84,7 +84,7 @@ const forgotPassword = async (
       let result= '';
       const charactersLength = PASSWORDRESET.length;
       for ( let i = 0; i < length; i++ ) {
-         result += SECRET_KEY.charAt(Math.floor(Math.random() * charactersLength));
+         result += PASSWORDRESET.charAt(Math.floor(Math.random() * charactersLength));
       }
       return result;
    }
