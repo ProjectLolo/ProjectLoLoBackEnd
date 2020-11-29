@@ -17,6 +17,7 @@ const typeDefs = gql`
       birthdate: String!
       profileImageUrl: String
     ): Kid!
+    deleteKid(kidId: String!): String
   }
 
   type Kid {
