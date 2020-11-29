@@ -1,7 +1,7 @@
 const User = require("../../../models/User");
 const bcrypt = require("bcrypt");
 const { toJWT } = require("../../../utils/jwt");
-const { SECRET_KEY, SALT_ROUNDS } = require("../../../config/constants");
+const { SECRET_KEY, SALT_ROUNDS, PASSWORDRESET } = require("../../../config/constants");
 const checkAuth = require("../../../utils/check-auth");
 const { sendMail } = require("../../../utils/nodeMailer");
 const {
@@ -77,12 +77,12 @@ const forgotPassword = async (
     const user = await User.findOne({ email: email });
 
     if (!user) {
-      throw new Error("User does not exists.");
+      return false;
     }
 
     function makePass(length) {
       let result= '';
-      const charactersLength = SECRET_KEY.length;
+      const charactersLength = PASSWORDRESET.length;
       for ( let i = 0; i < length; i++ ) {
          result += SECRET_KEY.charAt(Math.floor(Math.random() * charactersLength));
       }
@@ -103,7 +103,7 @@ const forgotPassword = async (
       passwordResetText(user.firstName, newPassword)
     );
 
-    return "Password resetted!";
+    return true;
   } catch (err) {
     throw err;
   }
