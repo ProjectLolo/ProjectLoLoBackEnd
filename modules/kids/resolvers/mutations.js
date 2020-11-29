@@ -1,4 +1,6 @@
 const Kid = require("../../../models/Kid");
+const FamilyMember = require("../../../models/FamilyMember");
+const LoveBank = require("../../../models/LoveBank");
 const checkAuth = require("../../../utils/check-auth");
 
 const { AuthenticationError, UserInputError } = require("apollo-server");
@@ -33,6 +35,30 @@ const createKid = async (
       return { ...result._doc };
     } else {
       throw new UserInputError("Kid already exist");
+    }
+  } catch (err) {
+    throw err;
+  }
+};
+
+const deleteKid = async (
+  _,
+  {  kidId },
+  context
+) => {
+  const user = checkAuth(context);
+  const kidExisted = await Kid.findOne({_id: kidId});
+  console.log("mutation", kidExisted)
+  try {
+    if (kidExisted) {
+      console.log("mutation kid exists")
+      await Kid.deleteOne({ _id: kidId })
+      await FamilyMember.deleteMany({ kid: kidId })
+      await LoveBank.deleteMany({ kidId: kidId })
+      return `${kidExisted.name} deleted!`
+      return 
+    } else {
+      throw new UserInputError("Kid not found");
     }
   } catch (err) {
     throw err;
@@ -112,4 +138,4 @@ const updateKidProfile = async (
   }
 };
 
-module.exports = { createKid, addKidProfileImage, updateKidProfile };
+module.exports = { createKid, addKidProfileImage, updateKidProfile, deleteKid };
