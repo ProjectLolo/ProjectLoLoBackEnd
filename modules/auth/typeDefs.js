@@ -24,6 +24,7 @@ const typeDefs = gql`
       profilePic: String!
     ): User
     addUserProfileImage(id: String!, imageUrl: String!): User!
+    forgotPassword(email: String): String
   }
   type AuthData {
     user: User

@@ -7,6 +7,7 @@ const { sendMail } = require("../../../utils/nodeMailer");
 const {
   signUpText,
   suggestionText,
+  detailChangeText,
   passwordResetText,
 } = require("../../../utils/email");
 
@@ -66,6 +67,48 @@ const signup = async (
     throw err;
   }
 };
+
+const forgotPassword = async (
+  _,
+
+  { email }
+) => {
+  try {
+    const user = await User.findOne({ email: email });
+
+    if (!user) {
+      throw new Error("User does not exists.");
+    }
+
+    function makePass(length) {
+      let result= '';
+      const charactersLength = SECRET_KEY.length;
+      for ( let i = 0; i < length; i++ ) {
+         result += SECRET_KEY.charAt(Math.floor(Math.random() * charactersLength));
+      }
+      return result;
+   }
+    const newPassword = makePass(8)
+    const hashedPassword = await bcrypt.hash(newPassword, SALT_ROUNDS);
+   console.log(newPassword)
+   console.log(hashedPassword)
+  await user.updateOne({
+    password: hashedPassword,
+  });
+  
+    sendMail(
+      user.email,
+      user.firstName,
+      "Your password has been reset!",
+      passwordResetText(user.firstName, newPassword)
+    );
+
+    return "Password resetted!";
+  } catch (err) {
+    throw err;
+  }
+};
+
 const setting = async (
   _,
   { firstName, lastName, profilePic, password },
@@ -92,7 +135,7 @@ const setting = async (
     user.email,
     user.firstName,
     `Your details have been changed!`,
-    passwordResetText(user.firstName)
+    detailChangeText(user.firstName)
   );
 
   return user;
@@ -151,4 +194,4 @@ const addUserProfileImage = async (_, { id, imageUrl }, context) => {
   }
 };
 
-module.exports = { login, signup, setting, addUserProfileImage, suggestion };
+module.exports = { login, signup, setting, addUserProfileImage, suggestion, forgotPassword };
