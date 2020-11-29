@@ -11,6 +11,7 @@ const typeDefs = gql`
       relation: String!
       notification: String!
     ): FamilyMember!
+    deleteMember(_id: String!): String
   }
 
   type FamilyMember {
