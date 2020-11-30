@@ -9,5 +9,7 @@ module.exports = {
   SECRET_CODE: process.env.SECRET_CODE || "ABCDEFGHIJKLMNOPQRSTUVWZYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()+",
   MAILJETKEYUSER: process.env.MAILJETKEYUSER,
   MAILJETKEYPASS: process.env.MAILJETKEYPASS,
-  MAILPORT: process.env.MAILPORT
+  MAILPORT: process.env.MAILPORT,
+  PASSWORDRESET: process.env.PASSWORDRESET || "ABCDEFGHIJKLMNOPQRSTUVWZYZabcdefghijklmnopqrstuvwxyz1234567890",
+
 };
