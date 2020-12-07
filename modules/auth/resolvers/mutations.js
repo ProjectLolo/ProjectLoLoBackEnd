@@ -153,7 +153,7 @@ const suggestion = async (_, { suggestion }, context) => {
   }
 
   sendMail(
-    user.email,
+    "anieke_lamers@hotmail.com",
     user.firstName,
     `Suggestion made by ${user.email}`,
     suggestionText(user.firstName, user.email, suggestion)
