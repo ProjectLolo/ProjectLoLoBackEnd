@@ -16,7 +16,7 @@ const createKid = async (
   const user = checkAuth(context);
   const kidExisted = await Kid.find({ name: name, birthdate: birthdate });
 
-  const code = await generated(10);
+  const code = await generated(5);
 
   try {
     if (!kidExisted[0]) {
