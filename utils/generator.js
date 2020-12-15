@@ -1,7 +1,7 @@
 const Kid = require("../models/Kid");
 
 const generated = async (num) => {
-  let values = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let values = "0123456789";
   let password = "";
   for (let i = 0; i < num; i++) {
     password =
